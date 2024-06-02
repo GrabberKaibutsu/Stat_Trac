@@ -25,16 +25,6 @@ db.once("open", () => {
   console.log("Connected to MongoDB");
 });
 
- const liveReloadServer = livereload.createServer();
- liveReloadServer.watch(path.join(__dirname, "../public"));
-
- app.use(connectLiveReload());
- liveReloadServer.server.once("connection", () => {
-   setTimeout(() => {
-     liveReloadServer.refresh("/");
-  }, 100);
- });
-
 // Import routes from the controllers
 const abilityRoutes = require("./controllers/abilityController");
 const characterRoutes = require("./controllers/characterController");
@@ -44,12 +34,14 @@ const savingThrowRoutes = require("./controllers/savingThrowController");
 const skillRoutes = require("./controllers/skillController");
 const spellRoutes = require("./controllers/spellController");
 const characterNoteRoutes = require("./controllers/characterNoteController");
+const authRoutes = require("./controllers/authController").router;
+const validateJWT = require("./controllers/authController").validateJWT;
 
 // Middleware
 app.use(
   cors({
     credentials: true,
-    origin: ["http://localhost:5173"]
+    origin: ["http://localhost:5173"],
   })
 );
 app.options("*", cors());
@@ -59,14 +51,15 @@ app.use(express.json());
 app.use(morgan("dev"));
 
 // Routes
-app.use('/abilities', abilityRoutes);
-app.use('/characters', characterRoutes);
-app.use('/equipment', equipmentRoutes);
-app.use('/features', featureRoutes);
-app.use('/saving-throws', savingThrowRoutes);
-app.use('/skills', skillRoutes);
-app.use('/spells', spellRoutes);
-app.use('/character-notes', characterNoteRoutes);
+app.use('/auth', authRoutes);
+app.use("/abilities", validateJWT, abilityRoutes);
+app.use("/characters", validateJWT, characterRoutes);
+app.use("/equipment", validateJWT, equipmentRoutes);
+app.use("/features", validateJWT, featureRoutes);
+app.use("/saving-throws", validateJWT, savingThrowRoutes);
+app.use("/skills", validateJWT, skillRoutes);
+app.use("/spells", validateJWT, spellRoutes);
+app.use("/character-notes", validateJWT, characterNoteRoutes);
 
 // Basic route for homepage
 app.get("/", (req, res) => {
