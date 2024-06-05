@@ -25,17 +25,10 @@ db.once("open", () => {
   console.log("Connected to MongoDB");
 });
 
-// Import routes from the controllers
-const abilityRoutes = require("./controllers/abilityController");
-const characterRoutes = require("./controllers/characterController");
-const equipmentRoutes = require("./controllers/equipmentController");
-const featureRoutes = require("./controllers/featureController");
-const savingThrowRoutes = require("./controllers/savingThrowController");
-const skillRoutes = require("./controllers/skillController");
-const spellRoutes = require("./controllers/spellController");
-const characterNoteRoutes = require("./controllers/characterNoteController");
-const authRoutes = require("./controllers/authController").router;
-const validateJWT = require("./controllers/authController").validateJWT;
+const characterController = require('./controllers/characterController');
+const skillController = require('./controllers/skillController'); 
+const spellController = require('./controllers/spellController');
+
 
 // Middleware
 app.use(
@@ -51,15 +44,9 @@ app.use(express.json());
 app.use(morgan("dev"));
 
 // Routes
-app.use('/auth', authRoutes);
-app.use("/abilities", validateJWT, abilityRoutes);
-app.use("/characters", validateJWT, characterRoutes);
-app.use("/equipment", validateJWT, equipmentRoutes);
-app.use("/features", validateJWT, featureRoutes);
-app.use("/saving-throws", validateJWT, savingThrowRoutes);
-app.use("/skills", validateJWT, skillRoutes);
-app.use("/spells", validateJWT, spellRoutes);
-app.use("/character-notes", validateJWT, characterNoteRoutes);
+app.use('/characters', characterController);
+app.use('/skills', skillController);
+app.use('/spells', spellController);
 
 // Basic route for homepage
 app.get("/", (req, res) => {

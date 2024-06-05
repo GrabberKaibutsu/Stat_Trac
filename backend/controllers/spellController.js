@@ -1,62 +1,62 @@
 const express = require('express');
 const router = express.Router();
-const Spell = require('../models/Spell');
+const Spell = require('../models/Spell'); 
 
-// Index - GET - /spells
-router.get('/', async (req, res) => {
-  try {
-    const spells = await Spell.find();
-    res.json(spells);
-  } catch (error) {
-    console.error('Error fetching spells:', error);
-    res.status(500).json({ error: 'Failed to fetch spells' });
-  }
-});
 
-// Show - GET - /spells/:id
-router.get('/:id', async (req, res) => {
+// Get spell by ID
+router.get('/:spellId', async (req, res) => {
   try {
-    const spell = await Spell.findById(req.params.id);
+    const { spellId } = req.params;
+    const spell = await Spell.findById(spellId).populate('characterId');
     if (!spell) {
       return res.status(404).json({ message: 'Spell not found' });
     }
     res.json(spell);
   } catch (error) {
-    console.error('Error fetching spell by ID:', error);
-    res.status(500).json({ error: 'Failed to fetch spell' });
+    console.error('Error fetching spell:', error);
+    res.status(500).json({ message: error.message });
   }
 });
 
-// Create - POST - /spells
-router.post('/', async (req, res) => {
+// Create new spell
+router.post('/', validateJWT, async (req, res) => {
   try {
-    const newSpell = await Spell.create(req.body);
-    res.status(201).json(newSpell);
+    const spell = new Spell(req.body);
+    await spell.save();
+    res.status(201).json(spell);
   } catch (error) {
     console.error('Error creating spell:', error);
-    res.status(500).json({ error: 'Failed to create spell' });
+    res.status(500).json({ message: error.message });
   }
 });
 
-// Update - PUT - /spells/:id
-router.put('/:id', async (req, res) => {
+// Update spell by ID
+router.put('/:spellId', validateJWT, async (req, res) => {
   try {
-    const updatedSpell = await Spell.findByIdAndUpdate(req.params.id, req.body, { new: true });
-    res.json(updatedSpell);
+    const { spellId } = req.params;
+    const spell = await Spell.findByIdAndUpdate(spellId, req.body, { new: true });
+    if (!spell) {
+      return res.status(404).json({ message: 'Spell not found' });
+    }
+    res.json(spell);
   } catch (error) {
     console.error('Error updating spell:', error);
-    res.status(500).json({ error: 'Failed to update spell' });
+    res.status(500).json({ message: error.message });
   }
 });
 
-// Delete - DELETE - /spells/:id
-router.delete('/:id', async (req, res) => {
+// Delete spell by ID
+router.delete('/:spellId', validateJWT, async (req, res) => {
   try {
-    await Spell.findByIdAndDelete(req.params.id);
+    const { spellId } = req.params;
+    const spell = await Spell.findByIdAndDelete(spellId);
+    if (!spell) {
+      return res.status(404).json({ message: 'Spell not found' });
+    }
     res.json({ message: 'Spell deleted successfully' });
   } catch (error) {
     console.error('Error deleting spell:', error);
-    res.status(500).json({ error: 'Failed to delete spell' });
+    res.status(500).json({ message: error.message });
   }
 });
 
