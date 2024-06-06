@@ -2,7 +2,7 @@ import React from "react";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-const host = import.meta.env.VITE_BACKENDURL
+const host = 'http://localhost:3001'
 const Signup = (props) => {
   const [formData, setFormData] = useState({
     username: "",

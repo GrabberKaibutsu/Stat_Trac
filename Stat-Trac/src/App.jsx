@@ -1,26 +1,20 @@
 import React from 'react';
+import { Routes, Route } from 'react-router-dom';
+import HomePage from './pages/Homepage';
+import Characters from './components/Chara';
+import CharacterSheet from './pages/characterSheet';
 
-const HomePage = () => {
+const App = () => {
   return (
-    <div className="home-page">
-      <h1>Welcome to the DND App!</h1>
-      <p>Explore the world of Dungeons and Dragons with our comprehensive app.</p>
-      <div className="features">
-        <div className="feature">
-          <h2>Characters</h2>
-          <p>Manage your characters, their abilities, equipment, and more.</p>
-        </div>
-        <div className="feature">
-          <h2>Spells</h2>
-          <p>Discover and organize spells for your characters.</p>
-        </div>
-        <div className="feature">
-          <h2>Equipment</h2>
-          <p>Explore a vast array of equipment options for your adventurers.</p>
-        </div>
-      </div>
+    <div className="app">
+      <Routes>
+        <Route path="/" element={<HomePage />} /> 
+        <Route path="/characters" element={<Characters />} />
+        <Route path="/character/:id" element={<CharacterSheet />} />
+        {/* Add other routes as needed */}
+      </Routes>
     </div>
   );
 };
 
-export default HomePage;
+export default App;

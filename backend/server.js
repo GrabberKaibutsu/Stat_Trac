@@ -28,7 +28,7 @@ db.once("open", () => {
 const characterController = require('./controllers/characterController');
 const skillController = require('./controllers/skillController'); 
 const spellController = require('./controllers/spellController');
-
+const userRouter = require("./controllers/userController");
 
 // Middleware
 app.use(
@@ -44,9 +44,10 @@ app.use(express.json());
 app.use(morgan("dev"));
 
 // Routes
-app.use('/characters', characterController);
+app.use('/character', characterController);
 app.use('/skills', skillController);
 app.use('/spells', spellController);
+app.use("/users", userRouter);
 
 // Basic route for homepage
 app.get("/", (req, res) => {

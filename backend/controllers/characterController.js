@@ -2,6 +2,17 @@ const express = require('express');
 const router = express.Router();
 const Character = require('../models/Character');
 
+router.get('/', async (req, res) => {
+    try {
+      const characters = await Character.find();
+      res.json(characters);
+    } catch (error) {
+      console.error('Error fetching characters:', error);
+      res.status(500).json({ message: error.message });
+    }
+  });
+
+// Get character by ID
 router.get('/:characterId', async (req, res) => {
     try {
       const { characterId } = req.params;
@@ -14,10 +25,10 @@ router.get('/:characterId', async (req, res) => {
       console.error('Error fetching character:', error);
       res.status(500).json({ message: error.message });
     }
-  });
-  
-  // Create new character
-  router.post('/', async (req, res) => {
+});
+
+// Create new character
+router.post('/new', async (req, res) => {
     try {
       const character = new Character(req.body);
       await character.save();
@@ -26,10 +37,10 @@ router.get('/:characterId', async (req, res) => {
       console.error('Error creating character:', error);
       res.status(500).json({ message: error.message });
     }
-  });
-  
-  // Update character by ID
-  router.put('/:characterId', async (req, res) => {
+});
+
+// Update character by ID
+router.put('/:characterId', async (req, res) => {
     try {
       const { characterId } = req.params;
       const character = await Character.findByIdAndUpdate(characterId, req.body, { new: true });
@@ -41,10 +52,10 @@ router.get('/:characterId', async (req, res) => {
       console.error('Error updating character:', error);
       res.status(500).json({ message: error.message });
     }
-  });
-  
-  // Delete character by ID
-  router.delete('/:characterId', async (req, res) => {
+});
+
+// Delete character by ID
+router.delete('/:characterId', async (req, res) => {
     try {
       const { characterId } = req.params;
       const character = await Character.findByIdAndDelete(characterId);
@@ -56,6 +67,6 @@ router.get('/:characterId', async (req, res) => {
       console.error('Error deleting character:', error);
       res.status(500).json({ message: error.message });
     }
-  });
-  
-  module.exports = router;
+});
+
+module.exports = router;
