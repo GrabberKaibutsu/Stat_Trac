@@ -18,6 +18,8 @@ const CharacterSchema = new Schema({
     wisdom: { type: Number },
     charisma: { type: Number },
     weaponName: { type: String },
+    spellName: { type: String },
+    spellLevel: { type: Number },
   });
 
   module.exports = mongoose.model('Character', CharacterSchema);

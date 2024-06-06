@@ -20,7 +20,6 @@ module.exports = {
   User: require("./user"),
   Character: require("./Character"),
   Skill: require("./skills"),
-//   app.use('/spells', spellController);
-//   app.use("/users", userRouter);
-  
+  Spell: require("./Spell")
+
 };
