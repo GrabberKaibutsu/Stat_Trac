@@ -19,7 +19,7 @@ router.get('/:spellId', async (req, res) => {
 });
 
 // Create new spell
-router.post('/', validateJWT, async (req, res) => {
+router.post('/', async (req, res) => {
   try {
     const spell = new Spell(req.body);
     await spell.save();
@@ -31,7 +31,7 @@ router.post('/', validateJWT, async (req, res) => {
 });
 
 // Update spell by ID
-router.put('/:spellId', validateJWT, async (req, res) => {
+router.put('/:spellId', async (req, res) => {
   try {
     const { spellId } = req.params;
     const spell = await Spell.findByIdAndUpdate(spellId, req.body, { new: true });
@@ -46,7 +46,7 @@ router.put('/:spellId', validateJWT, async (req, res) => {
 });
 
 // Delete spell by ID
-router.delete('/:spellId', validateJWT, async (req, res) => {
+router.delete('/:spellId', async (req, res) => {
   try {
     const { spellId } = req.params;
     const spell = await Spell.findByIdAndDelete(spellId);

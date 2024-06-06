@@ -17,7 +17,7 @@ router.get('/:characterId', async (req, res) => {
   });
   
   // Create new character
-  router.post('/', validateJWT, async (req, res) => {
+  router.post('/', async (req, res) => {
     try {
       const character = new Character(req.body);
       await character.save();
@@ -29,7 +29,7 @@ router.get('/:characterId', async (req, res) => {
   });
   
   // Update character by ID
-  router.put('/:characterId', validateJWT, async (req, res) => {
+  router.put('/:characterId', async (req, res) => {
     try {
       const { characterId } = req.params;
       const character = await Character.findByIdAndUpdate(characterId, req.body, { new: true });
@@ -44,7 +44,7 @@ router.get('/:characterId', async (req, res) => {
   });
   
   // Delete character by ID
-  router.delete('/:characterId', validateJWT, async (req, res) => {
+  router.delete('/:characterId', async (req, res) => {
     try {
       const { characterId } = req.params;
       const character = await Character.findByIdAndDelete(characterId);

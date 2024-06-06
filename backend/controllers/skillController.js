@@ -17,7 +17,7 @@ router.get('/:skillId', async (req, res) => {
   });
   
   // Create new skill
-  router.post('/', validateJWT, async (req, res) => {
+  router.post('/', async (req, res) => {
     try {
       const skill = new Skill(req.body);
       await skill.save();
@@ -29,7 +29,7 @@ router.get('/:skillId', async (req, res) => {
   });
   
   // Update skill by ID
-  router.put('/:skillId', validateJWT, async (req, res) => {
+  router.put('/:skillId', async (req, res) => {
     try {
       const { skillId } = req.params;
       const skill = await Skill.findByIdAndUpdate(skillId, req.body, { new: true });
@@ -44,7 +44,7 @@ router.get('/:skillId', async (req, res) => {
   });
   
   // Delete skill by ID
-  router.delete('/:skillId', validateJWT, async (req, res) => {
+  router.delete('/:skillId', async (req, res) => {
     try {
       const { skillId } = req.params;
       const skill = await Skill.findByIdAndDelete(skillId);
