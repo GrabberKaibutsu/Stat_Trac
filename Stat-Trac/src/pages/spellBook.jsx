@@ -1,21 +1,24 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 
 const host = 'http://localhost:3001';
 
 const SpellBook = () => {
   const [spells, setSpells] = useState([]);
   const [error, setError] = useState("");
+  const location = useLocation();
+  const searchParams = new URLSearchParams(location.search);
+  const characterId = searchParams.get('characterId');
 
   useEffect(() => {
     const fetchSpells = async () => {
       try {
-        const response = await fetch(`${host}/spells`, {
+        const response = await fetch(`${host}/spells?characterId=${characterId}`, {
           method: "GET",
           headers: {
             "Content-Type": "application/json",
           },
-          credentials: "include", 
+          credentials: "include",
         });
 
         if (!response.ok) {
@@ -30,8 +33,10 @@ const SpellBook = () => {
       }
     };
 
-    fetchSpells();
-  }, []);
+    if (characterId) {
+      fetchSpells();
+    }
+  }, [characterId]);
 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 sm:py-6">

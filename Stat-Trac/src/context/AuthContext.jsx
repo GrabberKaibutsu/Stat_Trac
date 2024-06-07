@@ -9,7 +9,6 @@ export const AuthProvider = ({ children }) => {
     const savedUser = localStorage.getItem("user");
     const token = localStorage.getItem("token");
     if (savedUser && token) {
-      // Ensure both user data and token are available
       setUser(JSON.parse(savedUser));
     }
   }, []);

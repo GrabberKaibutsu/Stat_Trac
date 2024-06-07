@@ -1,18 +1,20 @@
 const express = require('express');
 const router = express.Router();
-const Spell = require('../models/Spell'); 
+const Spell = require('../models/Spell');
 
+// Get all spells or spells by characterId
 router.get('/', async (req, res) => {
   try {
-    const spells = await Spell.find();
+    const { characterId } = req.query;
+    const spells = characterId
+      ? await Spell.find({ characterId }).populate('characterId')
+      : await Spell.find().populate('characterId');
     res.json(spells);
   } catch (error) {
     console.error('Error fetching spells:', error);
     res.status(500).json({ message: error.message });
   }
 });
-
-
 
 // Get spell by ID
 router.get('/:spellId', async (req, res) => {
@@ -30,7 +32,7 @@ router.get('/:spellId', async (req, res) => {
 });
 
 // Create new spell
-router.post('/', async (req, res) => {
+router.post('/new', async (req, res) => {
   try {
     const spell = new Spell(req.body);
     await spell.save();

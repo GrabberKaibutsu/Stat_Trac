@@ -2,10 +2,13 @@ const express = require('express');
 const router = express.Router();
 const Skill = require('../models/Skill');
 
-// Get all skills
+// Get all skills or skills by characterId
 router.get('/', async (req, res) => {
   try {
-    const skills = await Skill.find().populate('characterId');
+    const { characterId } = req.query;
+    const skills = characterId
+      ? await Skill.find({ characterId }).populate('characterId')
+      : await Skill.find().populate('characterId');
     res.json(skills);
   } catch (error) {
     console.error('Error fetching skills:', error);
@@ -29,7 +32,7 @@ router.get('/:skillId', async (req, res) => {
 });
 
 // Create new skill
-router.post('/', async (req, res) => {
+router.post('/new', async (req, res) => {
   try {
     const skill = new Skill(req.body);
     await skill.save();

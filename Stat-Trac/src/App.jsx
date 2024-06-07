@@ -3,7 +3,7 @@ import { Routes, Route } from 'react-router-dom';
 import HomePage from './pages/Homepage';
 import Characters from './components/Chara';
 import CharacterSheet from './pages/characterSheet';
-import SpellBook from './pages/pellBook';
+import SpellBook from './pages/SpellBook';
 import SpellDetail from './components/SpellDetail';
 import Skills from './pages/skillPage';
 import SkillDetail from './components/SkillDetail';

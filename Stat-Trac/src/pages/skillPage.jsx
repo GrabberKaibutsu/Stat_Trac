@@ -1,21 +1,24 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 
 const host = 'http://localhost:3001';
 
 const Skills = () => {
   const [skills, setSkills] = useState([]);
   const [error, setError] = useState("");
+  const location = useLocation();
+  const searchParams = new URLSearchParams(location.search);
+  const characterId = searchParams.get('characterId');
 
   useEffect(() => {
     const fetchSkills = async () => {
       try {
-        const response = await fetch(`${host}/skills`, {
+        const response = await fetch(`${host}/skills?characterId=${characterId}`, {
           method: "GET",
           headers: {
             "Content-Type": "application/json",
           },
-          credentials: "include", 
+          credentials: "include",
         });
 
         if (!response.ok) {
@@ -30,8 +33,10 @@ const Skills = () => {
       }
     };
 
-    fetchSkills();
-  }, []);
+    if (characterId) {
+      fetchSkills();
+    }
+  }, [characterId]);
 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 sm:py-6">
@@ -50,39 +55,34 @@ const Skills = () => {
                 key={skill._id}
                 className="bg-slate-800 shadow-lg rounded-lg p-2 sm:p-4 flex flex-col items-center text-center space-y-3"
               >
-                <Link
-                  to={`/skill/${skill._id}`}
-                  className="flex flex-col items-center space-y-3"
-                >
-                  <div>
-                    <h2 className="text-lg font-bold text-white">
-                      Skill: {skill.name}
-                    </h2>
-                    <p className="text-sm text-gray-500">
-                      Character: {skill.characterId}
-                    </p>
-                  </div>
-                  <div className="text-sm text-gray-400">
-                    <p>Acrobatics: {skill.acrobatics}</p>
-                    <p>Animal Handling: {skill.animalHandling}</p>
-                    <p>Arcana: {skill.arcana}</p>
-                    <p>Athletics: {skill.athletics}</p>
-                    <p>Deception: {skill.deception}</p>
-                    <p>History: {skill.history}</p>
-                    <p>Insight: {skill.insight}</p>
-                    <p>Intimidation: {skill.intimidation}</p>
-                    <p>Investigation: {skill.investigation}</p>
-                    <p>Medicine: {skill.medicine}</p>
-                    <p>Nature: {skill.nature}</p>
-                    <p>Perception: {skill.perception}</p>
-                    <p>Performance: {skill.performance}</p>
-                    <p>Persuasion: {skill.persuasion}</p>
-                    <p>Religion: {skill.religion}</p>
-                    <p>Sleight of Hand: {skill.sleightOfHand}</p>
-                    <p>Stealth: {skill.stealth}</p>
-                    <p>Survival: {skill.survival}</p>
-                  </div>
-                </Link>
+                <div>
+                  <h2 className="text-lg font-bold text-white">
+                    Skill: {skill.name}
+                  </h2>
+                  <p className="text-sm text-gray-500">
+                    Character: {skill.characterId}
+                  </p>
+                </div>
+                <div className="text-sm text-gray-400">
+                  <p>Acrobatics: {skill.acrobatics}</p>
+                  <p>Animal Handling: {skill.animalHandling}</p>
+                  <p>Arcana: {skill.arcana}</p>
+                  <p>Athletics: {skill.athletics}</p>
+                  <p>Deception: {skill.deception}</p>
+                  <p>History: {skill.history}</p>
+                  <p>Insight: {skill.insight}</p>
+                  <p>Intimidation: {skill.intimidation}</p>
+                  <p>Investigation: {skill.investigation}</p>
+                  <p>Medicine: {skill.medicine}</p>
+                  <p>Nature: {skill.nature}</p>
+                  <p>Perception: {skill.perception}</p>
+                  <p>Performance: {skill.performance}</p>
+                  <p>Persuasion: {skill.persuasion}</p>
+                  <p>Religion: {skill.religion}</p>
+                  <p>Sleight of Hand: {skill.sleightOfHand}</p>
+                  <p>Stealth: {skill.stealth}</p>
+                  <p>Survival: {skill.survival}</p>
+                </div>
               </li>
             ))}
           </ul>

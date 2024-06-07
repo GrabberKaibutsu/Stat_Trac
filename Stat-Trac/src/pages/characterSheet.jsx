@@ -1,40 +1,45 @@
 import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 
 const host = 'http://localhost:3001';
 
-const CharacterSheet = () => {
+const CharacterDetail = () => {
   const { id } = useParams();
   const [character, setCharacter] = useState(null);
   const [error, setError] = useState("");
 
   useEffect(() => {
-    fetch(`${host}/character/${id}`)
-      .then((response) => {
+    const fetchCharacter = async () => {
+      try {
+        const response = await fetch(`${host}/character/${id}`, {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          credentials: "include",
+        });
+
         if (!response.ok) {
           throw new Error("Network response was not ok");
         }
-        return response.json();
-      })
-      .then((data) => {
+
+        const data = await response.json();
         setCharacter(data);
-      })
-      .catch((error) => {
+      } catch (error) {
         console.error("Error fetching character:", error);
         setError("Failed to fetch character");
-      });
+      }
+    };
+
+    fetchCharacter();
   }, [id]);
 
   if (error) {
-    return (
-      <div className="text-red-600 text-center font-medium mt-5">
-        Error: {error}
-      </div>
-    );
+    return <p className="text-red-600 text-center font-medium mt-5">Error: {error}</p>;
   }
 
   if (!character) {
-    return <div className="text-white text-center mt-5">Loading...</div>;
+    return <p className="text-white text-center mt-5">Loading...</p>;
   }
 
   return (
@@ -51,18 +56,24 @@ const CharacterSheet = () => {
         <p><strong>Experience Points:</strong> {character.experiencePoints}</p>
         <p><strong>Background:</strong> {character.background}</p>
         <p><strong>Description:</strong> {character.description}</p>
-        <h2 className="text-2x1 font-bold mt-4">Attributes</h2>
+        <h2 className="text-2xl font-bold mt-4">Attributes</h2>
         <p><strong>Strength:</strong> {character.strength}</p>
         <p><strong>Dexterity:</strong> {character.dexterity}</p>
         <p><strong>Constitution:</strong> {character.constitution}</p>
         <p><strong>Intelligence:</strong> {character.intelligence}</p>
         <p><strong>Wisdom:</strong> {character.wisdom}</p>
         <p><strong>Charisma:</strong> {character.charisma}</p>
-        <h1 className="text-2xl font-bold mt-4">Equipment</h1>
-        <p><strong>Weapon:</strong> {character.weaponName}</p>
+        <h2 className="text-2xl font-bold mt-4">Weapon</h2>
+        <p><strong>Name:</strong> {character.weaponName}</p>
+        <div className="mt-4">
+          <Link to={`/skills?characterId=${character._id}`} className="text-blue-500 underline">View Skills</Link>
+        </div>
+        <div className="mt-4">
+          <Link to={`/spells?characterId=${character._id}`} className="text-blue-500 underline">View Spellbook</Link>
+        </div>
       </div>
     </div>
   );
 };
 
-export default CharacterSheet;
+export default CharacterDetail;
