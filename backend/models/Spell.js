@@ -1,15 +1,12 @@
 const mongoose = require('mongoose');
-const { Schema } = mongoose;
+const Schema = mongoose.Schema;
 
 const SpellSchema = new Schema({
-    characterId: { type: Schema.Types.ObjectId, ref: 'Character' },
-    spellName: { type: String },
-    spellLevel: { type: Number },
-    spellSchool: { type: String },
-    castTime: { type: String },
-    range: { type: String },
-    duration: { type: String },
-    components: { type: String },
-  });
+  name: { type: String, required: true },
+  level: { type: Number, required: true },
+  school: { type: String, required: true },
+  description: { type: String, required: true },
+  characterId: { type: Schema.Types.ObjectId, ref: 'Character' },
+});
 
 module.exports = mongoose.model('Spell', SpellSchema);

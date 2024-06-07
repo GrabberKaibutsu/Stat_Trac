@@ -2,6 +2,17 @@ const express = require('express');
 const router = express.Router();
 const Spell = require('../models/Spell'); 
 
+router.get('/', async (req, res) => {
+  try {
+    const spells = await Spell.find();
+    res.json(spells);
+  } catch (error) {
+    console.error('Error fetching spells:', error);
+    res.status(500).json({ message: error.message });
+  }
+});
+
+
 
 // Get spell by ID
 router.get('/:spellId', async (req, res) => {
