@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 const HomePage = () => {
   return (
-    <div className="bg-gray-900 text-white min-h-screen flex flex-col items-center justify-center">
+    <div className="bg-gray-900 text-white min-h-screen flex flex-col items-center justify-center pb-20">
       <div className="text-center mb-16">
         <h1 className="text-5xl font-bold mb-4">Welcome to the DND App!</h1>
         <p className="text-xl">Explore the world of Dungeons and Dragons with our comprehensive app.</p>

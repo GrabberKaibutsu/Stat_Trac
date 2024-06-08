@@ -1,19 +1,17 @@
 import React, { useState, useEffect } from "react";
-import { useLocation } from "react-router-dom";
+import { useParams } from "react-router-dom";
 
 const host = 'http://localhost:3001';
 
 const Skills = () => {
+  const { id } = useParams();
   const [skills, setSkills] = useState([]);
   const [error, setError] = useState("");
-  const location = useLocation();
-  const searchParams = new URLSearchParams(location.search);
-  const characterId = searchParams.get('characterId');
 
   useEffect(() => {
     const fetchSkills = async () => {
       try {
-        const response = await fetch(`${host}/skills?characterId=${characterId}`, {
+        const response = await fetch(`${host}/skills?characterId=${id}`, {
           method: "GET",
           headers: {
             "Content-Type": "application/json",
@@ -33,10 +31,8 @@ const Skills = () => {
       }
     };
 
-    if (characterId) {
-      fetchSkills();
-    }
-  }, [characterId]);
+    fetchSkills();
+  }, [id]);
 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 sm:py-6">

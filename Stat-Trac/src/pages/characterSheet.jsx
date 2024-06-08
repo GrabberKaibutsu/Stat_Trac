@@ -66,10 +66,10 @@ const CharacterDetail = () => {
         <h2 className="text-2xl font-bold mt-4">Weapon</h2>
         <p><strong>Name:</strong> {character.weaponName}</p>
         <div className="mt-4">
-          <Link to={`/skills?characterId=${character._id}`} className="text-blue-500 underline">View Skills</Link>
+          <Link to={`/character/${character._id}/skills`} className="text-blue-500 underline">View Skills</Link>
         </div>
         <div className="mt-4">
-          <Link to={`/spells?characterId=${character._id}`} className="text-blue-500 underline">View Spellbook</Link>
+          <Link to={`/character/${character._id}/spells`} className="text-blue-500 underline">View Spellbook</Link>
         </div>
       </div>
     </div>

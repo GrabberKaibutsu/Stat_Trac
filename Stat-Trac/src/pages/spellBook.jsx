@@ -1,19 +1,17 @@
 import React, { useState, useEffect } from "react";
-import { useLocation } from "react-router-dom";
+import { useParams } from "react-router-dom";
 
 const host = 'http://localhost:3001';
 
 const SpellBook = () => {
+  const { id } = useParams();
   const [spells, setSpells] = useState([]);
   const [error, setError] = useState("");
-  const location = useLocation();
-  const searchParams = new URLSearchParams(location.search);
-  const characterId = searchParams.get('characterId');
 
   useEffect(() => {
     const fetchSpells = async () => {
       try {
-        const response = await fetch(`${host}/spells?characterId=${characterId}`, {
+        const response = await fetch(`${host}/spells?characterId=${id}`, {
           method: "GET",
           headers: {
             "Content-Type": "application/json",
@@ -33,10 +31,8 @@ const SpellBook = () => {
       }
     };
 
-    if (characterId) {
-      fetchSpells();
-    }
-  }, [characterId]);
+    fetchSpells();
+  }, [id]);
 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 sm:py-6">
@@ -56,7 +52,7 @@ const SpellBook = () => {
                 className="bg-slate-800 shadow-lg rounded-lg p-2 sm:p-4 flex flex-col items-center text-center space-y-3"
               >
                 <Link
-                  to={`/spell/${spell._id}`}
+                  to={`/character/${id}/spell/${spell._id}`}
                   className="flex flex-col items-center space-y-3"
                 >
                   <div>
