@@ -13,8 +13,13 @@ const HomePage = () => {
           <h2 className="text-3xl font-bold mb-4">Characters</h2>
           <p className="text-lg mb-6">Manage your characters, their abilities, equipment, and more.</p>
           <Link to="/characters">
-            <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+            <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mb-4">
               View Characters
+            </button>
+          </Link>
+          <Link to="/roll-dice">
+            <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+              Dice Roller
             </button>
           </Link>
         </div>

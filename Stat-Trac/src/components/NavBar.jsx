@@ -1,15 +1,22 @@
 import React, { useContext } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext";
 
 const NavBar = () => {
   const { isAuthenticated, user, logout } = useContext(AuthContext);
   const navigate = useNavigate();
+  const location = useLocation();
 
   const handleLogout = () => {
     logout();
     navigate("/logout");
   };
+
+  // Check if the current path includes "/new"
+  const isNewPage = location.pathname.includes("/new");
+
+  // Extract the character ID from the current path
+  const characterId = location.pathname.split("/")[2];
 
   return (
     <nav className="bg-gray-800 text-white p-4 fixed bottom-0 w-full flex justify-between items-center">
@@ -18,7 +25,16 @@ const NavBar = () => {
           Home
         </Link>
       </div>
-      <div className="nav-links"></div>
+      <div className="nav-links">
+        {isNewPage && (
+          <button
+            onClick={() => navigate(`/character/${characterId}`)}
+            className="hover:text-indigo-600"
+          >
+            Back
+          </button>
+        )}
+      </div>
       <div className="profile-section">
         {isAuthenticated ? (
           <>
