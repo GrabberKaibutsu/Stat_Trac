@@ -44,7 +44,7 @@ const Signup = () => {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100 dark:bg-gray-900" id="main-content">
+    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100 dark:bg-gray-900">
       <section className="p-8 bg-white dark:bg-gray-700 rounded-lg shadow-md">
         <img className="mx-auto h-10 w-auto" src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500" alt="Your Company" />
         <form onSubmit={(e) => { e.preventDefault(); handleSignup(); }} className="space-y-4">

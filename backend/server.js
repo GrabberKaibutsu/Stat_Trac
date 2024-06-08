@@ -44,7 +44,7 @@ app.use(express.json());
 app.use(morgan("dev"));
 
 // Routes
-app.use('/character', characterController);
+app.use('/characters', characterController);
 app.use('/skills', skillController);
 app.use('/spells', spellController);
 app.use("/users", userRouter);

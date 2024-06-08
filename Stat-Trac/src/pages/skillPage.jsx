@@ -12,7 +12,7 @@ const Skills = () => {
   useEffect(() => {
     const fetchSkills = async () => {
       try {
-        const response = await fetch(`${host}/character/${id}/skills`, {
+        const response = await fetch(`${host}/characters/${id}/skills`, {
           method: "GET",
           headers: {
             "Content-Type": "application/json",
@@ -25,13 +25,13 @@ const Skills = () => {
 
         const data = await response.json();
         if (data.length === 0) {
-          navigate(`/character/${id}/skills/new`);
+          navigate(`/characters/${id}/skills/new`);
         } else {
           setSkills(data);
         }
       } catch (error) {
         console.error("Error fetching skills:", error);
-        navigate(`/character/${id}/skills/new`);
+        navigate(`/characters/${id}/skills/new`);
       }
     };
 
@@ -59,7 +59,7 @@ const Skills = () => {
                 className="bg-slate-800 shadow-lg rounded-lg p-2 sm:p-4 flex flex-col items-center text-center space-y-3"
               >
                 <Link
-                  to={`/character/${id}/skill/${skill._id}`}
+                  to={`/characters/${id}/skill/${skill._id}`}
                   className="flex flex-col items-center space-y-3"
                 >
                   <div>

@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 const { Schema } = mongoose;
 
 const CharacterSchema = new Schema({
+    userId: { type: Schema.Types.ObjectId, ref: 'User4', required: true },
     playerName: { type: String, required: true },
     characterName: { type: String, required: true },
     race: { type: String, required: true },

@@ -28,7 +28,7 @@ const NavBar = () => {
       <div className="nav-links">
         {isNewPage && (
           <button
-            onClick={() => navigate(`/character/${characterId}`)}
+            onClick={() => navigate(`/characters/${characterId}`)}
             className="hover:text-indigo-600"
           >
             Back

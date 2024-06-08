@@ -23,13 +23,14 @@ const App = () => {
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/characters" element={<Characters />} />
-          <Route path="/character/:id" element={<CharacterSheet />} />
-          <Route path="/character/:id/spells" element={<SpellBook />} />
-          <Route path="/character/:id/spells/new" element={<NewSpell />} />
-          <Route path="/character/:id/spell/:spellId" element={<SpellDetail />} />
-          <Route path="/character/:id/skills" element={<Skills />} />
-          <Route path="/character/:id/skills/new" element={<NewSkill />} />
-          <Route path="/character/:id/skill/:skillId" element={<SkillDetail />} />
+          <Route path="/characters/new" element={<NewCharacter />} />
+          <Route path="/characters/:id" element={<CharacterSheet />} />
+          <Route path="/characters/:id/spells" element={<SpellBook />} />
+          <Route path="/characters/:id/spells/new" element={<NewSpell />} />
+          <Route path="/characters/:id/spell/:spellId" element={<SpellDetail />} />
+          <Route path="/characters/:id/skills" element={<Skills />} />
+          <Route path="/characters/:id/skills/new" element={<NewSkill />} />
+          <Route path="/characters/:id/skill/:skillId" element={<SkillDetail />} />
           <Route path="/logout" element={<Logout />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/login" element={<Login />} />

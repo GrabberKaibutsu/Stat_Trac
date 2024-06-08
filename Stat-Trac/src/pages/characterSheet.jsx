@@ -1,22 +1,24 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { useParams, Link } from "react-router-dom";
+import { AuthContext } from "../context/AuthContext";
 
 const host = 'http://localhost:3001';
 
 const CharacterDetail = () => {
   const { id } = useParams();
+  const { user } = useContext(AuthContext);
   const [character, setCharacter] = useState(null);
   const [error, setError] = useState("");
 
   useEffect(() => {
     const fetchCharacter = async () => {
       try {
-        const response = await fetch(`${host}/character/${id}`, {
+        const response = await fetch(`${host}/characters/${id}`, {
           method: "GET",
           headers: {
             "Content-Type": "application/json",
-          },
-          credentials: "include",
+            "Authorization": `Bearer ${localStorage.getItem("token")}`
+          }
         });
 
         if (!response.ok) {
@@ -66,10 +68,10 @@ const CharacterDetail = () => {
         <h2 className="text-2xl font-bold mt-4">Weapon</h2>
         <p><strong>Name:</strong> {character.weaponName}</p>
         <div className="mt-4">
-          <Link to={`/character/${character._id}/skills`} className="text-blue-500 underline">View Skills</Link>
+          <Link to={`/characters/${character._id}/skills`} className="text-blue-500 underline">View Skills</Link>
         </div>
         <div className="mt-4">
-          <Link to={`/character/${character._id}/spells`} className="text-blue-500 underline">View Spellbook</Link>
+          <Link to={`/characters/${character._id}/spells`} className="text-blue-500 underline">View Spellbook</Link>
         </div>
       </div>
     </div>
