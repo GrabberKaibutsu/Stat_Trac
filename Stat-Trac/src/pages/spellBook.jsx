@@ -40,6 +40,31 @@ const SpellBook = () => {
     fetchSpells();
   }, [characterId, user]);
 
+  const handleDelete = async (spellId) => {
+    if (!window.confirm("Are you sure you want to delete this spell?")) {
+      return;
+    }
+
+    try {
+      const response = await fetch(`${host}/spells/${spellId}`, {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${localStorage.getItem("token")}`
+        }
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to delete spell");
+      }
+
+      setSpells(spells.filter(spell => spell._id !== spellId));
+    } catch (error) {
+      console.error("Error deleting spell:", error);
+      setError("Failed to delete spell");
+    }
+  };
+
   if (loading) {
     return (
       <div className="flex items-center justify-center min-h-screen bg-gray-900 text-white">
@@ -80,13 +105,19 @@ const SpellBook = () => {
               <p className="text-sm text-gray-500">Level: {spell.level}</p>
               <p className="text-sm text-gray-500">School: {spell.school}</p>
               <p className="text-sm text-gray-500">{spell.description}</p>
-              <div className="mt-4">
+              <div className="mt-4 flex justify-around w-full">
                 <Link
                   to={`/characters/${characterId}/spells/${spell._id}/edit`}
                   className="text-blue-500 underline"
                 >
                   Edit Spell
                 </Link>
+                <button
+                  onClick={() => handleDelete(spell._id)}
+                  className="text-red-500 underline"
+                >
+                  Delete Spell
+                </button>
               </div>
             </div>
           </div>
