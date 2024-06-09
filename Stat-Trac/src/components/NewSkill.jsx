@@ -48,7 +48,6 @@ const NewSkill = () => {
         throw new Error(errorMessage);
       }
 
-      const data = await response.json();
       navigate(`/characters/${characterId}/skills`);
     } catch (error) {
       console.error("Network error:", error);
@@ -62,36 +61,42 @@ const NewSkill = () => {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100 dark:bg-gray-900">
-      <section className="p-8 bg-white dark:bg-gray-700 rounded-lg shadow-md">
-        <h1 className="text-2xl font-bold mb-4">Create New Skill</h1>
-        <form onSubmit={handleSubmit} className="space-y-4">
-          {Object.keys(formData).map((key) => (
-            key !== "characterId" && (
-              <div key={key}>
-                <label htmlFor={key} className="block text-white mb-1 capitalize">{key.replace(/([A-Z])/g, ' $1').trim()}</label>
-                <input
-                  type="number"
-                  name={key}
-                  id={key}
-                  placeholder={key.replace(/([A-Z])/g, ' $1').trim()}
-                  value={formData[key]}
-                  onChange={handleChange}
-                  className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-600 dark:text-white"
-                  min="-4"
-                  max="4"
-                />
-              </div>
-            )
-          ))}
-          <input type="hidden" name="characterId" value={characterId} />
-          <input
-            type="submit"
-            value="Create Skill"
-            className="w-full bg-blue-500 text-white px-4 py-2 rounded-lg cursor-pointer hover:bg-blue-600 dark:hover:bg-blue-700"
-          />
-        </form>
-      </section>
+    <div className="bg-gradient-to-r from-purple-900 via-indigo-900 to-purple-900 text-white min-h-screen flex flex-col items-center justify-center pb-20">
+      <div className="text-center mb-16">
+        <h1 className="text-5xl font-bold mb-4 text-yellow-300 drop-shadow-md">Input Skill Values</h1>
+        <p className="text-xl text-yellow-200">Fill in the details to add a skill sheet to your character.</p>
+      </div>
+      <div className="w-full max-w-4xl flex flex-col items-center">
+        <section className="bg-gray-800 bg-opacity-80 p-8 rounded-lg shadow-2xl text-center w-full border border-yellow-500">
+          <h2 className="text-3xl font-bold mb-4 text-yellow-300">New Skill</h2>
+          <form onSubmit={handleSubmit} className="space-y-4">
+            {Object.keys(formData).map((key) => (
+              key !== "characterId" && (
+                <div key={key}>
+                  <label htmlFor={key} className="block text-yellow-200 mb-1 capitalize">{key.replace(/([A-Z])/g, ' $1').trim()}</label>
+                  <input
+                    type="number"
+                    name={key}
+                    id={key}
+                    placeholder={key.replace(/([A-Z])/g, ' $1').trim()}
+                    value={formData[key]}
+                    onChange={handleChange}
+                    className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500 bg-gray-700 border-gray-600 text-gray-300"
+                    min="-4"
+                    max="4"
+                  />
+                </div>
+              )
+            ))}
+            <input type="hidden" name="characterId" value={characterId} />
+            <input
+              type="submit"
+              value="Create Skill"
+              className="w-full bg-yellow-500 hover:bg-yellow-700 text-white px-4 py-2 rounded-full cursor-pointer transition duration-300 ease-in-out transform hover:scale-105 shadow-lg"
+            />
+          </form>
+        </section>
+      </div>
     </div>
   );
 };

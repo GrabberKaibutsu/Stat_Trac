@@ -34,7 +34,13 @@ const Logout = () => {
     logoutUser();
   }, [navigate, logout]);
 
-  return <div>Logging out...</div>;
+  return (
+    <div className="flex items-center justify-center min-h-screen bg-gradient-to-r from-purple-900 via-indigo-900 to-purple-900 text-white">
+      <div className="p-8 bg-gray-800 bg-opacity-80 rounded-lg shadow-2xl border border-yellow-500">
+        <h1 className="text-2xl font-bold text-center text-yellow-300">Logging out...</h1>
+      </div>
+    </div>
+  );
 };
 
 export default Logout;

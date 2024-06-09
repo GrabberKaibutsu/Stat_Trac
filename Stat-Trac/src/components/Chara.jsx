@@ -41,7 +41,7 @@ const Characters = () => {
 
   if (loading) {
     return (
-      <div className="flex items-center justify-center min-h-screen bg-gray-900 text-white">
+      <div className="flex items-center justify-center min-h-screen bg-gradient-to-r from-purple-900 via-indigo-900 to-purple-900 text-white">
         <p>Loading...</p>
       </div>
     );
@@ -49,13 +49,13 @@ const Characters = () => {
 
   if (characters.length === 0) {
     return (
-      <div className="flex flex-col items-center justify-center min-h-screen bg-gray-900 text-white">
+      <div className="flex flex-col items-center justify-center min-h-screen bg-gradient-to-r from-purple-900 via-indigo-900 to-purple-900 text-white">
         <div className="text-center mb-8">
-          <h1 className="text-4xl font-bold">No Characters Found</h1>
+          <h1 className="text-4xl font-bold text-yellow-300 drop-shadow-md">No Characters Found</h1>
         </div>
         <Link
           to="/characters/new"
-          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+          className="bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-2 px-4 rounded-full transition duration-300 ease-in-out transform hover:scale-105 shadow-lg"
         >
           Add New Character
         </Link>
@@ -64,44 +64,42 @@ const Characters = () => {
   }
 
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-12 bg-gray-900 text-white">
-      <div className="text-center mb-8">
-        <h1 className="text-4xl font-bold">Characters</h1>
-      </div>
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
-        {characters.map((character) => (
-          <div
-            key={character._id}
-            className="bg-gray-800 shadow-lg rounded-lg p-4 flex flex-col items-center text-center space-y-3 transform transition-transform hover:scale-105"
-          >
-            <Link
-              to={`/characters/${character._id}`}
-              className="flex flex-col items-center space-y-3"
+    <div className="min-h-screen bg-gradient-to-r from-purple-900 via-indigo-900 to-purple-900 text-white py-6 sm:py-12">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="text-center mb-8">
+          <h1 className="text-4xl font-bold text-yellow-300 drop-shadow-md">Characters</h1>
+        </div>
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
+          {characters.map((character) => (
+            <div
+              key={character._id}
+              className="bg-gray-800 bg-opacity-80 border border-yellow-500 shadow-2xl rounded-lg p-4 flex flex-col items-center text-center space-y-3 transform transition-transform hover:scale-105"
             >
-              <div>
-                <h2 className="text-lg font-bold">{character.characterName}</h2>
-                <p className="text-sm text-gray-500">
-                  {character.class} - Level {character.level}
-                </p>
-              </div>
-              <div className="text-sm text-gray-400">
-                <p>Player: {character.playerName}</p>
-                <p>Race: {character.race}</p>
-                <p>Alignment: {character.alignment}</p>
-                <p>XP: {character.experiencePoints}</p>
-              </div>
+              <Link
+                to={`/characters/${character._id}`}
+                className="flex flex-col items-center space-y-3"
+              >
+                <div>
+                  <h2 className="text-lg font-bold text-yellow-300">{character.characterName}</h2>
+                  <p className="text-sm text-yellow-200">
+                    {character.class} - Level {character.level}
+                  </p>
+                  <p className="text-sm text-yellow-200">Player: {character.playerName}</p>
+                  <p className="text-sm text-yellow-200">Race: {character.race}</p>
+                  <p className="text-sm text-yellow-200">Alignment: {character.alignment}</p>
+                  <p className="text-sm text-yellow-200">XP: {character.experiencePoints}</p>
+                </div>
+              </Link>
+            </div>
+          ))}
+          <div className="flex flex-col items-center justify-center text-center transform transition-transform hover:scale-105">
+            <Link
+              to="/characters/new"
+              className="bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-2 px-4 rounded-full transition duration-300 ease-in-out transform hover:scale-105 shadow-lg"
+            >
+              Add New Character
             </Link>
           </div>
-        ))}
-        <div
-          className="bg-gray-800 shadow-lg rounded-lg p-4 flex flex-col items-center justify-center text-center transform transition-transform hover:scale-105"
-        >
-          <Link
-            to="/characters/new"
-            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-          >
-            Add New Character
-          </Link>
         </div>
       </div>
     </div>

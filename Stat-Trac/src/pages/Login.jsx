@@ -43,15 +43,37 @@ const Login = () => {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100 dark:bg-gray-900">
-      <section className="p-8 bg-white dark:bg-gray-700 rounded-lg shadow-md">
-        <img className="mx-auto h-10 w-auto" src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500" alt="Your Company" />
+    <div className="flex flex-col items-center justify-center min-h-screen bg-gradient-to-r from-purple-900 via-indigo-900 to-purple-900 text-white">
+      <section className="p-8 bg-gray-800 bg-opacity-80 rounded-lg shadow-2xl border border-yellow-500">
+      <h1 className="text-2xl font-bold mb-4 text-center text-yellow-300">Log In</h1>
         <form onSubmit={(e) => { e.preventDefault(); handleLogin(); }} className="space-y-4">
-          <input type="text" name="email" placeholder="Email" autoComplete="email" value={formData.email} onChange={handleChange} className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-600 dark:text-white" />
-          <input type="password" name="password" placeholder="Password" autoComplete="current-password" value={formData.password} onChange={handleChange} className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-600 dark:text-white" />
-          <input type="submit" value="Log In" className="w-full bg-blue-500 text-white px-4 py-2 rounded-lg cursor-pointer hover:bg-blue-600 dark:hover:bg-blue-700" />
+          <input
+            type="text"
+            name="email"
+            placeholder="Email"
+            autoComplete="email"
+            value={formData.email}
+            onChange={handleChange}
+            className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white"
+          />
+          <input
+            type="password"
+            name="password"
+            placeholder="Password"
+            autoComplete="current-password"
+            value={formData.password}
+            onChange={handleChange}
+            className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white"
+          />
+          <input
+            type="submit"
+            value="Log In"
+            className="w-full bg-yellow-500 text-white px-4 py-2 rounded-lg cursor-pointer hover:bg-yellow-600"
+          />
           <div className="text-sm">
-            <a href="#" className="font-semibold text-indigo-400 hover:text-indigo-300">Forgot password?</a>
+            <a href="#" className="font-semibold text-indigo-400 hover:text-indigo-300">
+              Forgot password?
+            </a>
           </div>
         </form>
       </section>

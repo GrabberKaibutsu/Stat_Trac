@@ -34,7 +34,6 @@ const NewSpell = () => {
         throw new Error(errorMessage);
       }
 
-      const data = await response.json();
       navigate(`/characters/${characterId}/spells`);
     } catch (error) {
       console.error("Network error:", error);
@@ -48,48 +47,70 @@ const NewSpell = () => {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100 dark:bg-gray-900">
-      <section className="p-8 bg-white dark:bg-gray-700 rounded-lg shadow-md">
-        <h1 className="text-2xl font-bold mb-4">Create New Spell</h1>
-        <form onSubmit={handleSubmit} className="space-y-4">
-          <input
-            type="text"
-            name="name"
-            placeholder="Name"
-            value={formData.name}
-            onChange={handleChange}
-            className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-600 dark:text-white"
-          />
-          <input
-            type="number"
-            name="level"
-            placeholder="Level"
-            value={formData.level}
-            onChange={handleChange}
-            className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-600 dark:text-white"
-          />
-          <input
-            type="text"
-            name="school"
-            placeholder="School"
-            value={formData.school}
-            onChange={handleChange}
-            className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-600 dark:text-white"
-          />
-          <textarea
-            name="description"
-            placeholder="Description"
-            value={formData.description}
-            onChange={handleChange}
-            className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-600 dark:text-white"
-          />
-          <input
-            type="submit"
-            value="Create Spell"
-            className="w-full bg-blue-500 text-white px-4 py-2 rounded-lg cursor-pointer hover:bg-blue-600 dark:hover:bg-blue-700"
-          />
-        </form>
-      </section>
+    <div className="bg-gradient-to-r from-purple-900 via-indigo-900 to-purple-900 text-white min-h-screen flex flex-col items-center justify-center pb-20">
+      <div className="text-center mb-16">
+        <h1 className="text-5xl font-bold mb-4 text-yellow-300 drop-shadow-md">Add To SpellBook</h1>
+        <p className="text-xl text-yellow-200">Fill in the details to add a new spell to your character.</p>
+      </div>
+      <div className="w-full max-w-4xl flex flex-col items-center">
+        <section className="bg-gray-800 bg-opacity-80 p-8 rounded-lg shadow-2xl text-center w-full border border-yellow-500">
+          <h2 className="text-3xl font-bold mb-4 text-yellow-300">New Spell</h2>
+          <form onSubmit={handleSubmit} className="space-y-4">
+            <div>
+              <label htmlFor="name" className="block text-yellow-200 mb-1">Name</label>
+              <input
+                type="text"
+                name="name"
+                id="name"
+                placeholder="Name"
+                value={formData.name}
+                onChange={handleChange}
+                className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500 bg-gray-700 border-gray-600 text-gray-300"
+              />
+            </div>
+            <div>
+              <label htmlFor="level" className="block text-yellow-200 mb-1">Level</label>
+              <input
+                type="number"
+                name="level"
+                id="level"
+                placeholder="Level"
+                value={formData.level}
+                onChange={handleChange}
+                className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500 bg-gray-700 border-gray-600 text-gray-300"
+              />
+            </div>
+            <div>
+              <label htmlFor="school" className="block text-yellow-200 mb-1">School</label>
+              <input
+                type="text"
+                name="school"
+                id="school"
+                placeholder="School"
+                value={formData.school}
+                onChange={handleChange}
+                className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500 bg-gray-700 border-gray-600 text-gray-300"
+              />
+            </div>
+            <div>
+              <label htmlFor="description" className="block text-yellow-200 mb-1">Description</label>
+              <textarea
+                name="description"
+                id="description"
+                placeholder="Description"
+                value={formData.description}
+                onChange={handleChange}
+                className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500 bg-gray-700 border-gray-600 text-gray-300"
+              />
+            </div>
+            <input
+              type="submit"
+              value="Create Spell"
+              className="w-full bg-yellow-500 hover:bg-yellow-700 text-white px-4 py-2 rounded-full cursor-pointer transition duration-300 ease-in-out transform hover:scale-105 shadow-lg"
+            />
+          </form>
+        </section>
+      </div>
     </div>
   );
 };

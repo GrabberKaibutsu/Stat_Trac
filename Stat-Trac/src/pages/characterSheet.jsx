@@ -71,43 +71,45 @@ const CharacterDetail = () => {
   }
 
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 sm:py-6">
-      <h1 className="text-3xl font-bold text-center text-white my-6">
-        {character.characterName}
-      </h1>
-      <div className="bg-slate-800 shadow-lg rounded-lg p-6 text-white">
-        <p><strong>Player Name:</strong> {character.playerName}</p>
-        <p><strong>Class:</strong> {character.class}</p>
-        <p><strong>Level:</strong> {character.level}</p>
-        <p><strong>Race:</strong> {character.race}</p>
-        <p><strong>Alignment:</strong> {character.alignment}</p>
-        <p><strong>Experience Points:</strong> {character.experiencePoints}</p>
-        <p><strong>Background:</strong> {character.background}</p>
-        <p><strong>Description:</strong> {character.description}</p>
-        <h2 className="text-2xl font-bold mt-4">Attributes</h2>
-        <p><strong>Strength:</strong> {character.strength}</p>
-        <p><strong>Dexterity:</strong> {character.dexterity}</p>
-        <p><strong>Constitution:</strong> {character.constitution}</p>
-        <p><strong>Intelligence:</strong> {character.intelligence}</p>
-        <p><strong>Wisdom:</strong> {character.wisdom}</p>
-        <p><strong>Charisma:</strong> {character.charisma}</p>
-        <h2 className="text-2xl font-bold mt-4">Weapon</h2>
-        <p><strong>Name:</strong> {character.weaponName}</p>
-        <div className="mt-4">
-          <Link to={`/characters/${character._id}/skills`} className="text-blue-500 underline">View Skills</Link>
-        </div>
-        <div className="mt-4">
-          <Link to={`/characters/${character._id}/spells`} className="text-blue-500 underline">View Spellbook</Link>
-        </div>
-        <div className="mt-4">
-          <Link to={`/characters/${character._id}/edit`} className="bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-2 px-4 rounded">
-            Edit Character
-          </Link>
-        </div>
-        <div className="mt-4">
-          <button onClick={handleDelete} className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">
-            Delete Character
-          </button>
+    <div className="w-full min-h-screen bg-gradient-to-r from-purple-900 via-indigo-900 to-purple-900 flex justify-center items-center">
+      <div className="max-w-7xl w-full px-4 sm:px-6 lg:px-8 py-3 sm:py-6">
+        <h1 className="text-3xl font-bold text-center text-yellow-300 my-6 drop-shadow-md">
+          {character.characterName}
+        </h1>
+        <div className="bg-gray-800 bg-opacity-75 shadow-2xl rounded-lg p-6 text-white border border-yellow-500 flex flex-col items-center">
+          <p><strong className="text-yellow-200">Player Name:</strong> {character.playerName}</p>
+          <p><strong className="text-yellow-200">Class:</strong> {character.class}</p>
+          <p><strong className="text-yellow-200">Level:</strong> {character.level}</p>
+          <p><strong className="text-yellow-200">Race:</strong> {character.race}</p>
+          <p><strong className="text-yellow-200">Alignment:</strong> {character.alignment}</p>
+          <p><strong className="text-yellow-200">Experience Points:</strong> {character.experiencePoints}</p>
+          <p><strong className="text-yellow-200">Background:</strong> {character.background}</p>
+          <p><strong className="text-yellow-200">Description:</strong> {character.description}</p>
+          <h2 className="text-2xl font-bold mt-4 text-yellow-300">Attributes</h2>
+          <p><strong className="text-yellow-200">Strength:</strong> {character.strength}</p>
+          <p><strong className="text-yellow-200">Dexterity:</strong> {character.dexterity}</p>
+          <p><strong className="text-yellow-200">Constitution:</strong> {character.constitution}</p>
+          <p><strong className="text-yellow-200">Intelligence:</strong> {character.intelligence}</p>
+          <p><strong className="text-yellow-200">Wisdom:</strong> {character.wisdom}</p>
+          <p><strong className="text-yellow-200">Charisma:</strong> {character.charisma}</p>
+          <h2 className="text-2xl font-bold mt-4 text-yellow-300">Weapon</h2>
+          <p><strong className="text-yellow-200">Name:</strong> {character.weaponName}</p>
+          <div className="mt-4">
+            <Link to={`/characters/${character._id}/skills`} className="text-yellow-500 underline">View Skills</Link>
+          </div>
+          <div className="mt-4">
+            <Link to={`/characters/${character._id}/spells`} className="text-yellow-500 underline">View Spellbook</Link>
+          </div>
+          <div className="mt-4">
+            <Link to={`/characters/${character._id}/edit`} className="bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-2 px-4 rounded-full transition duration-300 ease-in-out transform hover:scale-105 shadow-lg">
+              Edit Character
+            </Link>
+          </div>
+          <div className="mt-4">
+            <button onClick={handleDelete} className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-full transition duration-300 ease-in-out transform hover:scale-105 shadow-lg">
+              Delete Character
+            </button>
+          </div>
         </div>
       </div>
     </div>

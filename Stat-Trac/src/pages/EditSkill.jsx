@@ -87,14 +87,14 @@ const EditSkill = () => {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100 dark:bg-gray-900">
-      <section className="p-8 bg-white dark:bg-gray-700 rounded-lg shadow-md">
-        <h1 className="text-2xl font-bold mb-4">Edit Skills</h1>
-        <form onSubmit={handleSubmit} className="space-y-4">
+    <div className="flex flex-col items-center justify-center min-h-screen bg-gradient-to-r from-purple-900 via-indigo-900 to-purple-900 text-white">
+      <section className="p-8 bg-gray-800 bg-opacity-80 rounded-lg shadow-2xl w-full max-w-2xl border border-yellow-500">
+        <h1 className="text-3xl font-bold mb-6 text-yellow-300">Edit Skills</h1>
+        <form onSubmit={handleSubmit} className="space-y-6">
           {Object.keys(formData).map((key) => (
             key !== "_id" && key !== "characterId" && key !== "__v" && (
               <div key={key}>
-                <label htmlFor={key} className="block text-white mb-1 capitalize">
+                <label htmlFor={key} className="block text-yellow-200 mb-2 capitalize">
                   {key.replace(/([A-Z])/g, ' $1').trim()}
                 </label>
                 <input
@@ -104,7 +104,7 @@ const EditSkill = () => {
                   placeholder={key.replace(/([A-Z])/g, ' $1').trim()}
                   value={formData[key]}
                   onChange={handleChange}
-                  className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-600 dark:text-white"
+                  className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white"
                   min="-4"
                   max="4"
                 />
@@ -114,7 +114,7 @@ const EditSkill = () => {
           <input
             type="submit"
             value="Save Skills"
-            className="w-full bg-blue-500 text-white px-4 py-2 rounded-lg cursor-pointer hover:bg-blue-600 dark:hover:bg-blue-700"
+            className="w-full bg-yellow-500 text-white px-4 py-2 rounded-lg cursor-pointer hover:bg-yellow-600"
           />
         </form>
       </section>

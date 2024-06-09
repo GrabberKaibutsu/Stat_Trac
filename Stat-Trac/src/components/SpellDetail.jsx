@@ -15,8 +15,8 @@ const SpellDetail = () => {
           method: "GET",
           headers: {
             "Content-Type": "application/json",
+            "Authorization": `Bearer ${localStorage.getItem("token")}`,
           },
-          credentials: "include",
         });
 
         if (!response.ok) {
@@ -43,14 +43,16 @@ const SpellDetail = () => {
   }
 
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 sm:py-6">
-      <h1 className="text-3xl font-bold text-center text-white my-6">
-        {spell.name}
-      </h1>
-      <div className="bg-slate-800 shadow-lg rounded-lg p-6 text-white">
-        <p><strong>Level:</strong> {spell.level}</p>
-        <p><strong>School:</strong> {spell.school}</p>
-        <p><strong>Description:</strong> {spell.description}</p>
+    <div className="w-full min-h-screen bg-gradient-to-r from-purple-900 via-indigo-900 to-purple-900 flex justify-center items-center">
+      <div className="max-w-7xl w-full px-4 sm:px-6 lg:px-8 py-3 sm:py-6">
+        <h1 className="text-3xl font-bold text-center text-yellow-300 my-6 drop-shadow-md">
+          {spell.name}
+        </h1>
+        <div className="bg-gray-800 bg-opacity-75 shadow-2xl rounded-lg p-6 text-white border border-yellow-500">
+          <p className="mb-4"><strong className="text-yellow-200">Level:</strong> {spell.level}</p>
+          <p className="mb-4"><strong className="text-yellow-200">School:</strong> {spell.school}</p>
+          <p className="mb-4"><strong className="text-yellow-200">Description:</strong> {spell.description}</p>
+        </div>
       </div>
     </div>
   );

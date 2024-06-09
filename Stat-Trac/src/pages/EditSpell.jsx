@@ -82,12 +82,12 @@ const EditSpell = () => {
   }
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100 dark:bg-gray-900">
-      <section className="p-8 bg-white dark:bg-gray-700 rounded-lg shadow-md">
-        <h1 className="text-2xl font-bold mb-4">Edit Spell</h1>
-        <form onSubmit={handleSubmit} className="space-y-4">
+    <div className="flex flex-col items-center justify-center min-h-screen bg-gradient-to-r from-purple-900 via-indigo-900 to-purple-900 text-white">
+      <section className="p-8 bg-gray-800 bg-opacity-80 rounded-lg shadow-2xl w-full max-w-2xl border border-yellow-500">
+        <h1 className="text-3xl font-bold mb-6 text-yellow-300">Edit Spell</h1>
+        <form onSubmit={handleSubmit} className="space-y-6">
           <div>
-            <label htmlFor="name" className="block text-white mb-1">Name</label>
+            <label htmlFor="name" className="block text-yellow-200 mb-2">Name</label>
             <input
               type="text"
               name="name"
@@ -95,11 +95,11 @@ const EditSpell = () => {
               placeholder="Name"
               value={formData.name}
               onChange={handleChange}
-              className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-600 dark:text-white"
+              className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white"
             />
           </div>
           <div>
-            <label htmlFor="level" className="block text-white mb-1">Level</label>
+            <label htmlFor="level" className="block text-yellow-200 mb-2">Level</label>
             <input
               type="number"
               name="level"
@@ -107,11 +107,11 @@ const EditSpell = () => {
               placeholder="Level"
               value={formData.level}
               onChange={handleChange}
-              className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-600 dark:text-white"
+              className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white"
             />
           </div>
           <div>
-            <label htmlFor="school" className="block text-white mb-1">School</label>
+            <label htmlFor="school" className="block text-yellow-200 mb-2">School</label>
             <input
               type="text"
               name="school"
@@ -119,24 +119,24 @@ const EditSpell = () => {
               placeholder="School"
               value={formData.school}
               onChange={handleChange}
-              className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-600 dark:text-white"
+              className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white"
             />
           </div>
           <div>
-            <label htmlFor="description" className="block text-white mb-1">Description</label>
+            <label htmlFor="description" className="block text-yellow-200 mb-2">Description</label>
             <textarea
               name="description"
               id="description"
               placeholder="Description"
               value={formData.description}
               onChange={handleChange}
-              className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-600 dark:text-white"
+              className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white"
             />
           </div>
           <input
             type="submit"
             value="Save Spell"
-            className="w-full bg-blue-500 text-white px-4 py-2 rounded-lg cursor-pointer hover:bg-blue-600 dark:hover:bg-blue-700"
+            className="w-full bg-yellow-500 text-white px-4 py-2 rounded-lg cursor-pointer hover:bg-yellow-600"
           />
         </form>
       </section>

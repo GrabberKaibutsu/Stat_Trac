@@ -43,37 +43,41 @@ const SkillDetail = () => {
   }
 
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 sm:py-6">
-      <h1 className="text-3xl font-bold text-center text-white my-6">
-        Skill Details
-      </h1>
-      <div className="bg-slate-800 shadow-lg rounded-lg p-6 text-white">
-        <p><strong>Character ID:</strong> {skill.characterId}</p>
-        <p><strong>Acrobatics:</strong> {skill.acrobatics}</p>
-        <p><strong>Animal Handling:</strong> {skill.animalHandling}</p>
-        <p><strong>Arcana:</strong> {skill.arcana}</p>
-        <p><strong>Athletics:</strong> {skill.athletics}</p>
-        <p><strong>Deception:</strong> {skill.deception}</p>
-        <p><strong>History:</strong> {skill.history}</p>
-        <p><strong>Insight:</strong> {skill.insight}</p>
-        <p><strong>Intimidation:</strong> {skill.intimidation}</p>
-        <p><strong>Investigation:</strong> {skill.investigation}</p>
-        <p><strong>Medicine:</strong> {skill.medicine}</p>
-        <p><strong>Nature:</strong> {skill.nature}</p>
-        <p><strong>Perception:</strong> {skill.perception}</p>
-        <p><strong>Performance:</strong> {skill.performance}</p>
-        <p><strong>Persuasion:</strong> {skill.persuasion}</p>
-        <p><strong>Religion:</strong> {skill.religion}</p>
-        <p><strong>Sleight of Hand:</strong> {skill.sleightOfHand}</p>
-        <p><strong>Stealth:</strong> {skill.stealth}</p>
-        <p><strong>Survival:</strong> {skill.survival}</p>
-        <div className="mt-4">
-          <Link
-            to={`/characters/${skill.characterId}/skills/edit`}
-            className="text-blue-500 underline"
-          >
-            Edit Skills
-          </Link>
+    <div className="w-full min-h-screen bg-gradient-to-r from-purple-900 via-indigo-900 to-purple-900 flex justify-center items-center">
+      <div className="max-w-7xl w-full px-4 sm:px-6 lg:px-8 py-3 sm:py-6">
+        <h1 className="text-3xl font-bold text-center text-yellow-300 my-6 drop-shadow-md">
+          Skill Details
+        </h1>
+        <div className="bg-gray-800 bg-opacity-75 shadow-2xl rounded-lg p-6 text-white border border-yellow-500">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <p><strong>Character ID:</strong> {skill.characterId}</p>
+            <p><strong>Acrobatics:</strong> {skill.acrobatics}</p>
+            <p><strong>Animal Handling:</strong> {skill.animalHandling}</p>
+            <p><strong>Arcana:</strong> {skill.arcana}</p>
+            <p><strong>Athletics:</strong> {skill.athletics}</p>
+            <p><strong>Deception:</strong> {skill.deception}</p>
+            <p><strong>History:</strong> {skill.history}</p>
+            <p><strong>Insight:</strong> {skill.insight}</p>
+            <p><strong>Intimidation:</strong> {skill.intimidation}</p>
+            <p><strong>Investigation:</strong> {skill.investigation}</p>
+            <p><strong>Medicine:</strong> {skill.medicine}</p>
+            <p><strong>Nature:</strong> {skill.nature}</p>
+            <p><strong>Perception:</strong> {skill.perception}</p>
+            <p><strong>Performance:</strong> {skill.performance}</p>
+            <p><strong>Persuasion:</strong> {skill.persuasion}</p>
+            <p><strong>Religion:</strong> {skill.religion}</p>
+            <p><strong>Sleight of Hand:</strong> {skill.sleightOfHand}</p>
+            <p><strong>Stealth:</strong> {skill.stealth}</p>
+            <p><strong>Survival:</strong> {skill.survival}</p>
+          </div>
+          <div className="mt-4 text-center">
+            <Link
+              to={`/characters/${skill.characterId}/skills/edit`}
+              className="bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-2 px-4 rounded-full transition duration-300 ease-in-out transform hover:scale-105 shadow-lg"
+            >
+              Edit Skills
+            </Link>
+          </div>
         </div>
       </div>
     </div>

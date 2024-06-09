@@ -66,13 +66,13 @@ const NewCharacter = () => {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100 dark:bg-gray-900">
-      <section className="p-8 bg-white dark:bg-gray-700 rounded-lg shadow-md w-full max-w-2xl">
-        <h1 className="text-2xl font-bold mb-4">Create New Character</h1>
+    <div className="flex flex-col items-center justify-center min-h-screen bg-gradient-to-b from-gray-900 via-purple-900 to-gray-900 p-4">
+      <section className="p-8 bg-gray-800 bg-opacity-75 rounded-lg shadow-2xl w-full max-w-2xl">
+        <h1 className="text-3xl font-bold mb-4 text-yellow-400 text-center">Create New Character</h1>
         <form onSubmit={handleSubmit} className="space-y-4">
           {Object.keys(formData).map((key) => (
             <div key={key}>
-              <label htmlFor={key} className="block text-white mb-1 capitalize">{key.replace(/([A-Z])/g, ' $1').trim()}</label>
+              <label htmlFor={key} className="block text-gray-300 mb-1 capitalize">{key.replace(/([A-Z])/g, ' $1').trim()}</label>
               <input
                 type="text"
                 name={key}
@@ -80,14 +80,14 @@ const NewCharacter = () => {
                 placeholder={key.replace(/([A-Z])/g, ' $1').trim()}
                 value={formData[key]}
                 onChange={handleChange}
-                className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-600 dark:text-white"
+                className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500 bg-gray-700 border-gray-600 text-gray-300"
               />
             </div>
           ))}
           <input
             type="submit"
             value="Create Character"
-            className="w-full bg-blue-500 text-white px-4 py-2 rounded-lg cursor-pointer hover:bg-blue-600 dark:hover:bg-blue-700"
+            className="w-full bg-yellow-500 hover:bg-yellow-700 text-white px-4 py-2 rounded-lg cursor-pointer transition-colors duration-300"
           />
         </form>
       </section>
