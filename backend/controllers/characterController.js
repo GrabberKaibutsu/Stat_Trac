@@ -1,5 +1,7 @@
 const express = require('express');
 const router = express.Router();
+const Spell = require('../models/Spell');
+const Skill = require('../models/Skill');
 const Character = require('../models/Character');
 const validateJWT = require('./validateJWT');
 
@@ -58,15 +60,23 @@ router.put('/:characterId', async (req, res) => {
   }
 });
 
-// Delete character by ID
 router.delete('/:characterId', async (req, res) => {
   try {
     const { characterId } = req.params;
-    const character = await Character.findByIdAndDelete(characterId);
+    const character = await Character.findById(characterId);
     if (!character) {
       return res.status(404).json({ message: 'Character not found' });
     }
-    res.json({ message: 'Character deleted successfully' });
+
+    const deleteSpells = await Spell.deleteMany({ characterId: characterId });
+    const deleteSkills = await Skill.deleteMany({ characterId: characterId });
+
+    console.log(`Deleted spells: ${deleteSpells.deletedCount}`);
+    console.log(`Deleted skills: ${deleteSkills.deletedCount}`);
+
+    await character.deleteOne();
+
+    res.json({ message: 'Character and associated spells and skills deleted successfully' });
   } catch (error) {
     console.error('Error deleting character:', error);
     res.status(500).json({ message: error.message });
