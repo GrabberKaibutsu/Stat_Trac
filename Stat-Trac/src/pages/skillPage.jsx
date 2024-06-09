@@ -1,86 +1,107 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { useParams, Link, useNavigate } from "react-router-dom";
+import { AuthContext } from "../context/AuthContext";
 
 const host = 'http://localhost:3001';
 
-const Skills = () => {
-  const { id } = useParams();
+const SkillPage = () => {
+  const { user } = useContext(AuthContext);
+  const { id: characterId } = useParams();
   const navigate = useNavigate();
-  const [skills, setSkills] = useState([]);
+  const [skills, setSkills] = useState(null);
   const [error, setError] = useState("");
 
   useEffect(() => {
     const fetchSkills = async () => {
       try {
-        const response = await fetch(`${host}/characters/${id}/skills`, {
+        const response = await fetch(`${host}/skills?characterId=${characterId}`, {
           method: "GET",
           headers: {
             "Content-Type": "application/json",
+            "Authorization": `Bearer ${localStorage.getItem("token")}`
           },
         });
 
         if (!response.ok) {
-          throw new Error("Network response was not ok");
+          const errorMessage = await response.text();
+          throw new Error(errorMessage);
         }
 
         const data = await response.json();
-        if (data.length === 0) {
-          navigate(`/characters/${id}/skills/new`);
-        } else {
-          setSkills(data);
-        }
+        console.log("Fetched skills data:", data); // Log the fetched data
+        setSkills(data);
       } catch (error) {
         console.error("Error fetching skills:", error);
-        navigate(`/characters/${id}/skills/new`);
+        setError("Failed to fetch skills");
       }
     };
 
     fetchSkills();
-  }, [id, navigate]);
+  }, [characterId]);
+
+  const handleEdit = () => {
+    navigate(`/characters/${characterId}/skills/edit`);
+  };
+
+  if (error) {
+    return (
+      <p className="text-red-600 text-center font-medium mt-5">Error: {error}</p>
+    );
+  }
+
+  if (!skills) {
+    return (
+      <div className="flex items-center justify-center min-h-screen bg-gray-900 text-white">
+        <p>Loading...</p>
+      </div>
+    );
+  }
+
+  if (skills.length === 0) {
+    return (
+      <div className="flex flex-col items-center justify-center min-h-screen bg-gray-900 text-white">
+        <div className="text-center mb-8">
+          <h1 className="text-4xl font-bold">No Skills Found</h1>
+        </div>
+        <Link
+          to={`/characters/${characterId}/skills/new`}
+          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+        >
+          Add New Skill
+        </Link>
+      </div>
+    );
+  }
 
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 sm:py-6">
-      {error ? (
-        <p className="text-red-600 text-center font-medium mt-5">
-          Error: {error}
-        </p>
-      ) : (
-        <div>
-          <h1 className="text-3xl font-bold text-center text-white my-6">
-            Skills
-          </h1>
-          <Link to={`/character/${id}/skills/new`} className="text-blue-500 hover:text-blue-700">
-            Create New Skill
-          </Link>
-          <ul className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-            {skills.map((skill) => (
-              <li
-                key={skill._id}
-                className="bg-slate-800 shadow-lg rounded-lg p-2 sm:p-4 flex flex-col items-center text-center space-y-3"
-              >
-                <Link
-                  to={`/characters/${id}/skill/${skill._id}`}
-                  className="flex flex-col items-center space-y-3"
-                >
-                  <div>
-                    <h2 className="text-lg font-bold text-white">
-                      {skill.name}
-                    </h2>
-                    <p className="text-sm text-gray-500">
-                      {skill.level} - {skill.school}
-                    </p>
-                  </div>
-                  <div className="text-sm text-gray-400">
-                    <p>{skill.description}</p>
-                  </div>
-                </Link>
-              </li>
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 sm:py-6 bg-gray-900 text-white">
+      <h1 className="text-3xl font-bold text-center text-white my-6">
+        Skills
+      </h1>
+      <div className="bg-slate-800 shadow-lg rounded-lg p-6 text-white">
+        {skills.map(skill => (
+          <div key={skill._id}>
+            {Object.entries(skill).map(([key, value]) => (
+              key !== "_id" && key !== "characterId" && key !== "__v" && (
+                <div key={key} className="flex justify-between">
+                  <span className="capitalize">{key.replace(/([A-Z])/g, ' $1').trim()}:</span>
+                  <span>{value}</span>
+                </div>
+              )
             ))}
-          </ul>
+          </div>
+        ))}
+        <div className="text-center mt-4">
+          <button
+            onClick={handleEdit}
+            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+          >
+            Edit Skills
+          </button>
         </div>
-      )}
+      </div>
     </div>
   );
 };
 
-export default Skills;
+export default SkillPage;

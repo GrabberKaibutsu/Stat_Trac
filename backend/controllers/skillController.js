@@ -1,6 +1,10 @@
 const express = require('express');
 const router = express.Router();
 const Skill = require('../models/Skill');
+const validateJWT = require('./validateJWT');
+
+// Apply middleware to all routes
+router.use(validateJWT);
 
 // Get all skills or skills by characterId
 router.get('/', async (req, res) => {
@@ -42,7 +46,6 @@ router.post('/new', async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 });
-
 // Update skill by ID
 router.put('/:skillId', async (req, res) => {
   try {

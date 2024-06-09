@@ -1,14 +1,14 @@
-import React, { useState, useContext } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import React, { useState, useEffect, useContext } from "react";
+import { useParams, useNavigate } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext";
 
 const host = 'http://localhost:3001';
 
-const NewSkill = () => {
-  const { id: characterId } = useParams();
+const EditSkill = () => {
   const { user } = useContext(AuthContext);
+  const { id: characterId } = useParams();
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
-    characterId: characterId,
     acrobatics: "",
     animalHandling: "",
     arcana: "",
@@ -29,13 +29,39 @@ const NewSkill = () => {
     survival: "",
   });
 
-  const navigate = useNavigate();
+  useEffect(() => {
+    const fetchSkills = async () => {
+      try {
+        const response = await fetch(`${host}/skills?characterId=${characterId}`, {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${localStorage.getItem("token")}`
+          },
+        });
+
+        if (!response.ok) {
+          const errorMessage = await response.text();
+          throw new Error(errorMessage);
+        }
+
+        const data = await response.json();
+        if (data.length > 0) {
+          setFormData(data[0]); // Assuming there is only one skill object per character
+        }
+      } catch (error) {
+        console.error("Error fetching skills:", error);
+      }
+    };
+
+    fetchSkills();
+  }, [characterId]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch(`${host}/skills/new`, {
-        method: "POST",
+      const response = await fetch(`${host}/skills/${formData._id}`, {
+        method: "PUT",
         headers: {
           "Content-Type": "application/json",
           "Authorization": `Bearer ${localStorage.getItem("token")}`
@@ -48,7 +74,6 @@ const NewSkill = () => {
         throw new Error(errorMessage);
       }
 
-      const data = await response.json();
       navigate(`/characters/${characterId}/skills`);
     } catch (error) {
       console.error("Network error:", error);
@@ -64,12 +89,14 @@ const NewSkill = () => {
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100 dark:bg-gray-900">
       <section className="p-8 bg-white dark:bg-gray-700 rounded-lg shadow-md">
-        <h1 className="text-2xl font-bold mb-4">Create New Skill</h1>
+        <h1 className="text-2xl font-bold mb-4">Edit Skills</h1>
         <form onSubmit={handleSubmit} className="space-y-4">
           {Object.keys(formData).map((key) => (
-            key !== "characterId" && (
+            key !== "_id" && key !== "characterId" && key !== "__v" && (
               <div key={key}>
-                <label htmlFor={key} className="block text-white mb-1 capitalize">{key.replace(/([A-Z])/g, ' $1').trim()}</label>
+                <label htmlFor={key} className="block text-white mb-1 capitalize">
+                  {key.replace(/([A-Z])/g, ' $1').trim()}
+                </label>
                 <input
                   type="number"
                   name={key}
@@ -84,10 +111,9 @@ const NewSkill = () => {
               </div>
             )
           ))}
-          <input type="hidden" name="characterId" value={characterId} />
           <input
             type="submit"
-            value="Create Skill"
+            value="Save Skills"
             className="w-full bg-blue-500 text-white px-4 py-2 rounded-lg cursor-pointer hover:bg-blue-600 dark:hover:bg-blue-700"
           />
         </form>
@@ -96,4 +122,4 @@ const NewSkill = () => {
   );
 };
 
-export default NewSkill;
+export default EditSkill;

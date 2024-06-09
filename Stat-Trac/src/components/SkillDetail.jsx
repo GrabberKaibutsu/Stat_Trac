@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 
 const host = 'http://localhost:3001';
 
@@ -15,8 +15,8 @@ const SkillDetail = () => {
           method: "GET",
           headers: {
             "Content-Type": "application/json",
+            "Authorization": `Bearer ${localStorage.getItem("token")}`,
           },
-          credentials: "include",
         });
 
         if (!response.ok) {
@@ -48,7 +48,7 @@ const SkillDetail = () => {
         Skill Details
       </h1>
       <div className="bg-slate-800 shadow-lg rounded-lg p-6 text-white">
-        <p><strong>Character:</strong> {skill.characterId}</p>
+        <p><strong>Character ID:</strong> {skill.characterId}</p>
         <p><strong>Acrobatics:</strong> {skill.acrobatics}</p>
         <p><strong>Animal Handling:</strong> {skill.animalHandling}</p>
         <p><strong>Arcana:</strong> {skill.arcana}</p>
@@ -67,6 +67,14 @@ const SkillDetail = () => {
         <p><strong>Sleight of Hand:</strong> {skill.sleightOfHand}</p>
         <p><strong>Stealth:</strong> {skill.stealth}</p>
         <p><strong>Survival:</strong> {skill.survival}</p>
+        <div className="mt-4">
+          <Link
+            to={`/characters/${skill.characterId}/skills/edit`}
+            className="text-blue-500 underline"
+          >
+            Edit Skills
+          </Link>
+        </div>
       </div>
     </div>
   );

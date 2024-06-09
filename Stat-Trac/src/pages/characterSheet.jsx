@@ -100,6 +100,11 @@ const CharacterDetail = () => {
           <Link to={`/characters/${character._id}/spells`} className="text-blue-500 underline">View Spellbook</Link>
         </div>
         <div className="mt-4">
+          <Link to={`/characters/${character._id}/edit`} className="bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-2 px-4 rounded">
+            Edit Character
+          </Link>
+        </div>
+        <div className="mt-4">
           <button onClick={handleDelete} className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">
             Delete Character
           </button>

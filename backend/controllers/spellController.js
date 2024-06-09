@@ -1,6 +1,10 @@
 const express = require('express');
 const router = express.Router();
 const Spell = require('../models/Spell');
+const validateJWT = require('./validateJWT');
+
+// Apply middleware to all routes
+router.use(validateJWT);
 
 // Get all spells or spells by characterId
 router.get('/', async (req, res) => {
@@ -42,6 +46,7 @@ router.post('/new', async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 });
+
 
 // Update spell by ID
 router.put('/:spellId', async (req, res) => {
