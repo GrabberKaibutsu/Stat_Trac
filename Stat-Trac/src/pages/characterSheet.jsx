@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
-import { useParams, Link } from "react-router-dom";
+import { useParams, Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext";
 
 const host = 'http://localhost:3001';
@@ -9,6 +9,7 @@ const CharacterDetail = () => {
   const { user } = useContext(AuthContext);
   const [character, setCharacter] = useState(null);
   const [error, setError] = useState("");
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchCharacter = async () => {
@@ -35,6 +36,31 @@ const CharacterDetail = () => {
 
     fetchCharacter();
   }, [id]);
+
+  const handleDelete = async () => {
+    if (!window.confirm("Are you sure you want to delete this character?")) {
+      return;
+    }
+
+    try {
+      const response = await fetch(`${host}/characters/${id}`, {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${localStorage.getItem("token")}`
+        }
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to delete character");
+      }
+
+      navigate("/characters");
+    } catch (error) {
+      console.error("Error deleting character:", error);
+      setError("Failed to delete character");
+    }
+  };
 
   if (error) {
     return <p className="text-red-600 text-center font-medium mt-5">Error: {error}</p>;
@@ -72,6 +98,11 @@ const CharacterDetail = () => {
         </div>
         <div className="mt-4">
           <Link to={`/characters/${character._id}/spells`} className="text-blue-500 underline">View Spellbook</Link>
+        </div>
+        <div className="mt-4">
+          <button onClick={handleDelete} className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">
+            Delete Character
+          </button>
         </div>
       </div>
     </div>

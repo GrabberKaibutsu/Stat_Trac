@@ -38,6 +38,7 @@ const App = () => {
           <Route path="/roll-dice" element={<DiceRollerPage />} />
         </Routes>
       </div>
+      <div className="h-12"></div>
       <NavBar />
     </div>
   );
