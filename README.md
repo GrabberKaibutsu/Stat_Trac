@@ -60,7 +60,10 @@ Launch app [Here.](https://stat-trac.netlify.app)
 ## Wireframes 
 
 
-
+![image](https://github.com/GrabberKaibutsu/Stat_Trac/assets/152819224/4aa26762-b682-430e-af75-af1297cb7980)
+![image222](https://github.com/GrabberKaibutsu/Stat_Trac/assets/152819224/306cbd07-158f-4859-a077-4175531f7d42)
+![image (1)](https://github.com/GrabberKaibutsu/Stat_Trac/assets/152819224/d0351ace-bf5b-4688-9bda-2d61dd69bdf1)
+![image (2)](https://github.com/GrabberKaibutsu/Stat_Trac/assets/152819224/38bc95cd-84b7-4916-bd75-d589544c72ae)
 
 
 <br>
@@ -68,12 +71,7 @@ Launch app [Here.](https://stat-trac.netlify.app)
 ## ERD
 
 
-
-
-
-<br>
-
-
+![IMG_9171](https://github.com/GrabberKaibutsu/Stat_Trac/assets/152819224/3d70b939-cf7e-46e1-88d0-ec5d322e1e33)
 
 <br>
 
